@@ -1,8 +1,7 @@
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 import os
 import torch
 import json
-from PIGuard import PIGuard
 from util import set_seed, get_logger
 from params import parse_args
 
@@ -10,24 +9,25 @@ def acc_compute(model, target_set, target_class="benign", name="chat"):
     bad_sample = []
     logits_list = []
     save_dict = []
+    batch_size = 32
 
-    if target_class == "benign":
-        target_label = 0
-    else:
-        target_label = 1
-    
+
     with torch.no_grad():
-        for idx, sample in enumerate(target_set):
-            class_logits = model.classify(sample)
-            pred = class_logits.argmax().item()
-            if pred != target_label:
-                bad_sample.append(sample)
-                logits_list.append(class_logits.cpu())
-                save_dict.append({"prompt": sample, "logits": class_logits.cpu().squeeze().tolist()})
-                # print(f"Prompt: {sample}\nLogits: {class_logits.cpu()}")
+        for i in range(0, len(target_set), batch_size):
+            batch = target_set[i : i + batch_size]   
+            preds = model(batch)                   
 
-            del class_logits
-            torch.cuda.empty_cache()
+            for sample, pred in zip(batch, preds):
+                if pred["label"] != target_class:
+                    bad_sample.append(sample)
+                    logits_list.append(pred["score"])
+                    save_dict.append({
+                        "prompt": sample,
+                        "logits": pred["score"]
+                    })
+
+            del preds
+            # torch.cuda.empty_cache()
         
     acc = 1 - len(save_dict)/len(target_set)
     print(f"{name} set accuracy: {acc}")
@@ -185,15 +185,22 @@ if __name__ == "__main__":
 
     for key in sorted(args.__dict__):
         logger.info("  <<< {}: {}".format(key, args.__dict__[key]))
-    tokenizer = AutoTokenizer.from_pretrained('microsoft/deberta-v3-base')
+    tokenizer = AutoTokenizer.from_pretrained('leolee99/PIGuard', model_max_length=2048)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
-    model = PIGuard('microsoft/deberta-v3-base', num_labels=2, device=device)
-    model.load_state_dict(torch.load(args.resume, map_location=device), strict=False)
+    model = AutoModelForSequenceClassification.from_pretrained("leolee99/PIGuard", trust_remote_code=True)
 
     model.to(device)
 
+    classifier = pipeline(
+        "text-classification",
+        model=model,
+        tokenizer=tokenizer,
+        truncation=True,
+        )
+
+
     dataset_root = args.dataset_root
-    evaluate(model, dataset_root)
+    evaluate(classifier, dataset_root)

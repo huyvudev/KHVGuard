@@ -124,9 +124,14 @@ python train.py
 
 ## 📋 Evaluation
 
-You can evaluate the model on both 4 datasets ***(NotInject, PINT, Wildguard-Benign, BIPIA)*** by excuting the command:
+You can evaluate the model on both 4 datasets ***(NotInject, PINT, Wildguard-Benign, BIPIA)*** by executing the command:
 ```
 python eval.py --resume ${CHECKPOINT}$
+```
+
+Or more convinently, you can evaluate through our huggingface model by executing the command:
+```
+python eval_hf.py
 ```
 
 ## 📈 Results
