@@ -1,18 +1,21 @@
-🛡️ KHVGuard - Vietnamese Prompt Injection Detection
-KHVGuard là hệ thống phát hiện các câu lệnh độc hại (Prompt Injection/Jailbreak) dành riêng cho các mô hình ngôn ngữ lớn (LLM) tiếng Việt. Dự án sử dụng mô hình PhoBERT làm backbone để phân loại văn bản thành hai nhãn: An toàn (Benign) và Nguy hiểm (Attack).
+# 🛡️ KHVGuard - Vietnamese Prompt Injection Detection
 
-Ngoài ra, dự án cũng thực hiện so sánh hiệu năng với mô hình DeBERTa (v3) được huấn luyện lại trên cùng tập dữ liệu tiếng Việt.
+**KHVGuard** là hệ thống phát hiện các câu lệnh độc hại (Prompt Injection/Jailbreak) dành riêng cho các mô hình ngôn ngữ lớn (LLM) tiếng Việt. Dự án sử dụng mô hình **PhoBERT** (VinAI) làm backbone để phân loại văn bản thành hai nhãn:
+- **✅ An toàn (Benign)**
+- **⚠️ Nguy hiểm (Attack)**
 
-📂 Cấu trúc dự án
-Plaintext
+Ngoài ra, dự án cũng thực hiện so sánh hiệu năng với mô hình **DeBERTa (v3)** được huấn luyện lại trên cùng tập dữ liệu tiếng Việt để đánh giá tính hiệu quả.
 
+## 📂 Cấu trúc dự án
+
+```text
 KHVGuard/
 ├── Datasets/              # Chứa dữ liệu huấn luyện
 │   ├── train.json         # Dữ liệu train
 │   └── valid.json         # Dữ liệu validation
 ├── TrainModel/            # Source code huấn luyện (Jupyter Notebook)
 │   ├── PhoBERT.ipynb      # Notebook huấn luyện model chính (PhoBERT)
-│   └── DeBERT_base_v3.ipynb # Notebook huấn luyện model tham chiếu (DeBERTa)
+│   └── DeBERT_base_v3.ipynb # Notebook huấn luyện model so sánh (DeBERTa)
 ├── KHVGuard.py            # Ứng dụng giao diện web (Gradio App) để demo
 ├── requirements.txt       # Danh sách thư viện cần thiết
 ├── .gitignore             # File cấu hình bỏ qua venv và model nặng
