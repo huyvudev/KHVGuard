@@ -20,39 +20,43 @@ KHVGuard/
 ├── requirements.txt       # Danh sách thư viện cần thiết
 ├── .gitignore             # File cấu hình bỏ qua venv và model nặng
 └── README.md              # Hướng dẫn sử dụng
-#🚀 Cài đặt môi trường
+```
+# 🚀 Cài đặt môi trường
 Để chạy được dự án trên máy cá nhân, vui lòng làm theo các bước sau:
 
 1. Clone dự án
 Bash
-
+```text
 git clone https://github.com/username-cua-ban/KHVGuard.git
 cd KHVGuard
+```
 2. Tạo môi trường ảo (Virtual Environment)
 Khuyến khích sử dụng Python 3.10 trở lên.
 
 Trên Windows:
 
 Bash
-
+```text
 python -m venv venv
 venv\Scripts\activate
-(Nếu gặp lỗi SecurityError trên PowerShell, hãy chạy lệnh: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser)
+```
+
 
 Trên Linux/MacOS:
 
 Bash
-
+```text
 python3 -m venv venv
 source venv/bin/activate
+```
 3. Cài đặt thư viện
 Bash
 
 pip install -r requirements.txt
-📥 Tải Model (Trọng số)
+# 📥 Tải Model (Trọng số)
 Do file trọng số mô hình (.pth) có dung lượng lớn, chúng tôi không lưu trực tiếp trên GitHub. Bạn vui lòng tải về theo hướng dẫn sau:
 
-Truy cập link Google Drive chính thức: TẢI MODEL TẠI ĐÂY
+Truy cập link Google Drive chính thức: [TẢI MODEL TẠI ĐÂY](https://drive.google.com/file/d/1-CaK21nyI07gEHX5B2hDCgcuwO0tMSF1/view?usp=sharing)
 
 Tải file về máy.
 
@@ -62,21 +66,23 @@ Copy file best_model.pth vào thư mục gốc của dự án (ngang hàng với
 
 Cấu trúc sau khi copy đúng sẽ trông như sau:
 
-Plaintext
+```text
 
 KHVGuard/
 ├── ...
 ├── KHVGuard.py
 └── best_model.pth  <-- File nằm ở đây
-🖥️ Hướng dẫn sử dụng (Demo)
+```
+# 🖥️ Hướng dẫn sử dụng (Demo)
 Sau khi đã cài đặt thư viện và tải model, bạn có thể khởi chạy giao diện demo bằng lệnh:
 
 Bash
-
+```text
 python KHVGuard.py
+```
 Chờ một chút để hệ thống tải PhoBERT. Khi thấy dòng chữ: Running on local URL: http://127.0.0.1:7860 Hãy mở trình duyệt và truy cập địa chỉ trên để sử dụng tool.
 
-📊 Huấn luyện & Dữ liệu
+# 📊 Huấn luyện & Dữ liệu
 Dự án bao gồm 2 phần thử nghiệm nằm trong thư mục TrainModel:
 
 PhoBERT.ipynb:
