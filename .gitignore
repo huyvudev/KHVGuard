@@ -1,0 +1,20 @@
+# --- Môi trường ảo (BẮT BUỘC) ---
+venv/
+env/
+.env
+
+# --- File rác của Python (Sinh ra khi chạy code) ---
+__pycache__/
+*.py[cod]
+
+# --- File Model nặng (GitHub chặn file >100MB) ---
+*.pth
+*.pt
+*.bin
+*.h5
+
+# --- File hệ thống / IDE ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
