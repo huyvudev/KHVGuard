@@ -99,7 +99,3 @@ Sử dụng microsoft/deberta-v3-base.
 
 Được fine-tune lại trên bộ dữ liệu tiếng Việt (Datasets/) để làm cơ sở so sánh hiệu năng với PhoBERT.
 
-⚠️ Lưu ý quan trọng
-File best_model.pth và thư mục venv/ đã được thêm vào .gitignore để tránh đẩy lên Github (do giới hạn dung lượng và xung đột môi trường).
-
-Nếu muốn train lại model, hãy đảm bảo đường dẫn tới Datasets/train.json trong notebook là chính xác.
