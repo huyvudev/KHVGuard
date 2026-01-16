@@ -20,7 +20,7 @@ KHVGuard/
 ├── requirements.txt       # Danh sách thư viện cần thiết
 ├── .gitignore             # File cấu hình bỏ qua venv và model nặng
 └── README.md              # Hướng dẫn sử dụng
-🚀 Cài đặt môi trường
+#🚀 Cài đặt môi trường
 Để chạy được dự án trên máy cá nhân, vui lòng làm theo các bước sau:
 
 1. Clone dự án
